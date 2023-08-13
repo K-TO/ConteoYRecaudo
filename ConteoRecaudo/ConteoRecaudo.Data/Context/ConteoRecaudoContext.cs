@@ -1,18 +1,25 @@
 ﻿using ConteoRecaudo.Data.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using ConteoRecaudo.Data.SpModels;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace ConteoRecaudo.Data.Context
 {
     public class ConteoRecaudoContext : DbContext
     {
-        //private readonly IConfiguration Config;
-
-        public ConteoRecaudoContext(DbContextOptions<ConteoRecaudoContext> options/*, IConfiguration config*/) : base(options)
+        public ConteoRecaudoContext(DbContextOptions options) : base(options)
         {
-            //Config = config;
         }
+
+      
+        //public ConteoRecaudoContext(DbContextOptions<ConteoRecaudoContext> options) : base(options)
+        //{
+        //}
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    //optionsBuilder.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
+        //    optionsBuilder.UseSqlServer(_config["ConnectionStrings:DefaultConnection"]);
+        //}
 
         //public async Task CommitAsync()
         //{
@@ -20,9 +27,14 @@ namespace ConteoRecaudo.Data.Context
         //}
 
         //public virtual DbSet<Prestamo> Prestamo { get; set; }
+        //public virtual DbSet<Recaudo> Recaudo { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Recaudo> Recaudo { get; set; }
+        public virtual DbSet<ObtenerRecaudosFiltrados> ObtenerRecaudosFiltrados { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
+        //    optionsBuilder.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
         //    //optionsBuilder.UseLazyLoadingProxies(true);
         //    //            if (!optionsBuilder.IsConfigured)
         //    //            {
@@ -33,15 +45,22 @@ namespace ConteoRecaudo.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.HasDefaultSchema(Config.GetValue<string>("SchemaName"));
-
-            //modelBuilder.Entity<Prestamo>(entity =>
-            //{
-            //    entity.HasKey(p => p.Id);
-            //    entity.Property(p => p.FechaMaximaDevolucion).HasColumnType("datetime");
-            //});
-
             base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.HasDefaultSchema(_config.GetValue<string>("SchemaName"));
+
+            modelBuilder.Entity<Recaudo>(entity =>
+            {
+                entity.HasKey(p => p.Id);
+            });
+
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.HasKey(p => p.Id);
+            });
+
+            modelBuilder.Entity<ObtenerRecaudosFiltrados>().HasNoKey();
+            //    .ToSqlQuery("EXEC");
         }
     }
 }

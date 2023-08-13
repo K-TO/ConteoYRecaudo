@@ -1,0 +1,31 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <div class="container">
+    <div class="justify-content-center row">
+      <div class="col-md-6">
+        <div class="clearfix">
+          <h1 class="float-start display-3 me-4">404</h1>
+          <h4 class="pt-3">¡Ups! Estas perdido.</h4>
+          <p class="text-medium-emphasis float-start">
+            No se encontró la página que está buscando.
+          </p>
+        </div>
+        <div class="input-group input-prepend">
+          <span cInputGroupText>
+            <svg cIcon name="cilMagnifyingGlass"></svg>
+          </span>
+
+          <p>Puedes...</p>
+          <div class="row">
+            <ul>
+              <li class="list-group-item"><a class="link-primary" routerLink="/home">Volver al inicio</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>
