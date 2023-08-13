@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ConteoRecaudo.Data\ConteoRecaudo.Data.csproj" />
+    <ProjectReference Include="..\ConteoRecaudo.Infraestructure\ConteoRecaudo.Infraestructure.csproj" />
+  </ItemGroup>
+
 </Project>
