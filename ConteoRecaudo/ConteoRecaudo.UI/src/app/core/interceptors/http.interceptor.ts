@@ -27,7 +27,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + this.authService.getCurrentToken(),
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+          //'Access-Control-Allow-Origin': '*',
         })
       });
     }

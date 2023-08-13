@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,14 +14,15 @@ export class HeaderComponent {
   private USER_KEY = 'auth-user';
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.userName = "John Doe";
   }
 
   logOut(){
-    console.log('cloc')
     this.authService.logout();
+    this.router.navigate(['/home']);
   }
 
 }

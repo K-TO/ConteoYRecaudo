@@ -1,1 +1,101 @@
-<p>register works!</p>
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Crea tu cuenta!</h1>
+                        </div>
+                        <div class="">
+                            <p class="text-danger">{{messaje}}</p>
+                        </div>
+                        <form [formGroup]="form" (ngSubmit)="registerUser()" class="user">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                        [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" placeholder="Nombre"
+                                        formControlName="name" name="name">
+                                    <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['name'].errors['required']">El nombre es requerido.</div>
+                                        <div *ngIf="f['name'].errors['minLength']">Minimo 4 caracteres.</div>
+                                        <div *ngIf="f['name'].errors['maxLength']">Maximo 50 caracteres.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+                                        placeholder="Apellido" formControlName="lastName" name="lastName">
+                                    <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['lastName'].errors['required']">El apellido es requerido.</div>
+                                        <div *ngIf="f['lastName'].errors['minLength']">Minimo 4 caracteres.</div>
+                                        <div *ngIf="f['lastName'].errors['maxLength']">Maximo 50 caracteres.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="username" class="form-control form-control-user" id="username"
+                                    [ngClass]="{ 'is-invalid': submitted && f['userName'].errors }"
+                                    placeholder="Nombre de usuario" formControlName="userName" name="userName">
+                                <div *ngIf="submitted && f['userName'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['userName'].errors['required']">El nombre de usuario es requerido.
+                                    </div>
+                                    <div *ngIf="f['userName'].errors['pattern']">El nombre de usuario solo permite
+                                        letras, numeros y (_-).</div>
+                                    <div *ngIf="f['userName'].errors['minLength']">Minimo 4 caracteres.</div>
+                                    <div *ngIf="f['userName'].errors['maxLength']">Maximo 50 caracteres.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control form-control-user" id="email"
+                                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" placeholder="Email"
+                                    formControlName="email" name="email">
+                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['email'].errors['minLength']">Minimo 10 caracteres.</div>
+                                    <div *ngIf="f['email'].errors['maxLength']">Maximo 50 caracteres.</div>
+                                    <div *ngIf="f['email'].errors['email']">El email no es valido.</div>
+                                    <div *ngIf="f['email'].errors['required']">El email es requerido.</div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="password" class="form-control form-control-user"
+                                        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" id="password"
+                                        placeholder="Contraseña" formControlName="password" name="password">
+                                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['password'].errors['minLength']">Minimo 4 caracteres.</div>
+                                        <div *ngIf="f['password'].errors['maxLength']">Maximo 50 caracteres.</div>
+                                        <div *ngIf="f['password'].errors['required']">La contraseña es requerida.</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control form-control-user"
+                                        [ngClass]="{ 'is-invalid': submitted && f['repeatPassword'].errors }"
+                                        id="repeatpassword" placeholder="Repetir contraseña"
+                                        formControlName="repeatPassword" name="repeatPassword">
+                                    <div *ngIf="submitted && f['repeatPassword'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['repeatPassword'].errors['minLength']">Minimo 4 caracteres.</div>
+                                        <div *ngIf="f['repeatPassword'].errors['maxLength']">Maximo 50 caracteres.</div>
+                                        <div *ngIf="f['repeatPassword'].errors['required']">La confirmación de
+                                            contraseña es requerida.</div>
+                                        <div *ngIf="f['repeatPassword'].errors['confirmPasswordValidator']">Las
+                                            contraseñas no coinciden.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-user btn-block" type="submit">
+                                Registrarse
+                            </button>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="/auth">Already have an account? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

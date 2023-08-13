@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { Report } from '../models/report';
+import { Register } from '../models/register';
+import { RegisterResponse } from '../models/register-response';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ReportService {
-  
-  apiUrl = `${environment.apiUrl}/api/Recaudo`;
+export class UserService {
+  apiUrl = `${environment.apiUrl}/api/usuario`;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -20,19 +20,16 @@ export class ReportService {
 
   constructor(private http: HttpClient) {}
 
- 
-
-  getRecaudoReport(anio: number, estacion: string): Observable<Report> {
+  registerUser(register: Register): Observable<RegisterResponse> {
     return this.http
-      .post<Report>(
-        this.apiUrl,
-        JSON.stringify({ anio, estacion }),
+      .post<RegisterResponse>(
+        this.apiUrl + '/register',
+        JSON.stringify(register),
         this.httpOptions
       )
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  // Error handling
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

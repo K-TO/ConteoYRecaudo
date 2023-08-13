@@ -18,7 +18,7 @@ export class AuthService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+      //'Access-Control-Allow-Origin': '*',
     }),
   };
 
@@ -43,11 +43,6 @@ export class AuthService {
   isAuthenticated(): boolean {
     const user = window.sessionStorage.getItem(this.USER_KEY);
     return user ? true : false;
-    // if (user) {
-    //   return true;
-    // }
-
-    // return false;
   }
 
   getCurrentToken() {

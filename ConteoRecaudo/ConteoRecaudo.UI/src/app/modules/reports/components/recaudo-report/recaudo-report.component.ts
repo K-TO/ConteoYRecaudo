@@ -40,8 +40,6 @@ export class RecaudoReportComponent implements OnInit {
     return this.reportService
       .getRecaudoReport(2021, '')
       .subscribe((data: Report) => {
-        console.log('data');
-        console.log(data);
         this.reportData = data;
       });
   }
