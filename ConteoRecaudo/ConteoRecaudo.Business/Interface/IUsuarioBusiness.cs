@@ -5,7 +5,7 @@ namespace ConteoRecaudo.Business.Interface
 {
     public interface IUsuarioBusiness
     {
-        void Register(Usuario usuario);
+        string Register(Usuario usuario);
         Task<AuthenticationResponse> Authenticate(AuthenticateRequest authenticate);
     }
 }

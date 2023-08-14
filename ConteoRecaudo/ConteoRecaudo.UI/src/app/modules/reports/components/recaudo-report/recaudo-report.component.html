@@ -13,17 +13,19 @@
         <div class="card-body">
 
             <div class="row container-fluid">
-                <form (ngSubmit)="onSubmit()" class="form-inline" id="miformulario">
+                <form [formGroup]="form" (ngSubmit)="filter()" class="form-inline" id="miformulario">
                     <label class="sr-only" for="anio">Año</label>
                     <div class="input-group mb-2 mr-sm-2">
-                        <select class="form-control form-control-solid" id="anio">
-                            <option value="2021">2021</option>
+                        <select class="form-control form-control-solid" id="anio" formControlName="anio">
+                            <option *ngFor="let i of filterYears" 
+                            [attr.selected]="i === selectedYear ? 'selected' : null"
+                            value="{{i}}">{{i}}</option>
                         </select>
                     </div>
 
                     <label class="sr-only" for="estacion">Estación</label>
                     <div class="input-group mb-2 mr-sm-2">
-                        <input type="text" class="form-control" id="estacion" placeholder="estacion">
+                        <input type="text" class="form-control" id="estacion" placeholder="estacion" formControlName="estacion">
                         <div *ngIf="submitted && f['estacion'].errors" class="invalid-feedback">
                             <div *ngIf="f['estacion'].errors['minLength']">El usuario es requerido</div>
                         </div>
@@ -36,6 +38,9 @@
 
             <div class="table-responsive">
                 <table class="table table-bordered row" id="dataTable" width="100%" cellspacing="0">
+                    <tbody ng-if="reportData.sPRecaudoYearReport.length == 0" style="width: 100%;">
+                        <td colspan="5" class="text-center">No hay registros...</td>
+                      </tbody>
                     <div *ngFor="let item of reportData.sPRecaudoYearReport let ia = index">
                         <tr>
                             <th *ngIf="ia <= 0"></th>

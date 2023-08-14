@@ -12,16 +12,19 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
   templateUrl: './recaudo-report.component.html',
   styleUrls: ['./recaudo-report.component.css'],
 })
+
 export class RecaudoReportComponent implements OnInit {
   reportData: Report;
   recaudo: Recaudo[];
+  filterYears: number[];
   loading = true;
-  tittle = 'Reporte de recaudo calculado por año.';
   form: FormGroup = new FormGroup({
     anio: new FormControl(''),
     estacion: new FormControl(''),
   });
   submitted = false;
+  selectedYear: number = 2021;
+  tittle = `Reporte de recaudo calculado por año. (${this.selectedYear}).`;
 
   dtOptions: ADTSettings = {};
 
@@ -34,19 +37,26 @@ export class RecaudoReportComponent implements OnInit {
     this.reportData = new Report(0, 0, [
       new RecaudoReport('', 0, 0, this.recaudo),
     ]);
+    this.filterYears = [];
   }
 
-  loadRecaudoReport() {
+  loadRecaudoReport(anio: number, estacion: string) {
     return this.reportService
-      .getRecaudoReport(2021, '')
+      .getRecaudoReport(anio, estacion)
       .subscribe((data: Report) => {
         this.reportData = data;
       });
   }
 
-  ngOnInit() {
-    this.loadRecaudoReport();
+  loadFilterYear(){
+    for(let i = 0; i < 10; i++) {
+      this.filterYears.push((new Date()).getFullYear() - i);
+    }
+  }
 
+  ngOnInit() {
+    this.loadRecaudoReport(2021, '');
+    this.loadFilterYear();
     this.form = this.formBuilder.group({
       anio: [
         '',
@@ -66,19 +76,20 @@ export class RecaudoReportComponent implements OnInit {
     });
 
     this.loading = false;
-
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 
-  onSubmit(): void {
+  filter(): void {
     this.submitted = true;
+    console.log(`filtrando => ${this.form.value.anio}, ${this.form.value.estacion}`)
     if (this.form.invalid) {
       return;
+    } else{
+      this.loadRecaudoReport(this.form.value.anio, this.form.value.estacion)
     }
-    // this.login(this.form.value.username, this.form.value.password);
   }
 
   ngAfterViewInit() {

@@ -6,6 +6,7 @@ import { ReportsRoutingModule } from './reports-routing.module';
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportService } from 'src/app/core/services/report.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ReportService } from 'src/app/core/services/report.service';
     SharedModule,
     ReportsRoutingModule,
     DataTablesModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   exports: [
     RecaudoReportComponent

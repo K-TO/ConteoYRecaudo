@@ -31,8 +31,8 @@ namespace ConteoRecaudo.API.Controllers
         public IActionResult Register(Register register)
         {
             Usuario usuario = _mapper.Map<Usuario>(register);
-            _usuarioBusiness.Register(usuario);
-            return Ok(new { message = "Registro exitoso." });
+            string result = _usuarioBusiness.Register(usuario);
+            return Ok(new { message = result });
         }
 
         #endregion

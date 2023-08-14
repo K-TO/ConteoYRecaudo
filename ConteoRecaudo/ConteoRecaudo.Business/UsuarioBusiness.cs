@@ -25,9 +25,18 @@ namespace ConteoRecaudo.Business
         #endregion
 
         #region Methods
-        public void Register(Usuario usuario)
+        public string Register(Usuario usuario)
         {
-            _usuarioRepository.Register(usuario);
+            try
+            {
+                _usuarioRepository.Register(usuario);
+                return "Registro exitoso.";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message.ToString();
+                throw;
+            }
         }
 
         public async Task<AuthenticationResponse> Authenticate(AuthenticateRequest authenticate)
